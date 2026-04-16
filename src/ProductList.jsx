@@ -1,11 +1,15 @@
-import Header from './components/Header';
-import PlantCard from './components/PlantCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
+import Header from './components/Header';
 
 function ProductList({ sections }) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const addedToCart = cartItems.reduce((accumulator, item) => {
+    accumulator[item.name] = true;
+    return accumulator;
+  }, {});
 
   const handleAddToCart = (plant) => {
     dispatch(addItem(plant));
@@ -33,16 +37,33 @@ function ProductList({ sections }) {
 
             <div className="plant-grid">
               {section.plants.map((plant) => (
-                <PlantCard
-                  key={plant.id}
-                  plant={{ ...plant, sectionTitle: section.title }}
-                  isInCart={cartItems.some((item) => item.name === plant.name)}
-                  onAddToCart={handleAddToCart}
-                />
+                <article key={plant.id} className="plant-card">
+                  <img className="plant-image" src={plant.image} alt={plant.name} />
+                  <div className="plant-card-body">
+                    <div className="plant-card-top">
+                      <div>
+                        <h3>{plant.name}</h3>
+                        <p className="plant-price">{plant.cost}</p>
+                      </div>
+                      <span className="plant-chip">{section.title}</span>
+                    </div>
+                    <p className="plant-description">{plant.description}</p>
+                    <button
+                      type="button"
+                      className={`button add-button ${addedToCart[plant.name] ? 'button-muted' : ''}`}
+                      onClick={() => handleAddToCart(plant)}
+                      disabled={addedToCart[plant.name]}
+                    >
+                      {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                    </button>
+                  </div>
+                </article>
               ))}
             </div>
           </section>
         ))}
+
+        <p className="cart-total-text">Cart items: {totalQuantity}</p>
       </main>
     </div>
   );

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header';
-import CartItemCard from './components/CartItemCard';
 import { removeItem, updateQuantity } from './CartSlice';
 
 function CartItem() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -15,7 +16,14 @@ function CartItem() {
   const calculateTotalAmount = () =>
     cartItems.reduce((sum, item) => sum + calculateTotalCost(item), 0);
 
-  const handleContinueShopping = () => {};
+  const onContinueShopping = (e) => {
+    e.preventDefault();
+    navigate('/products');
+  };
+
+  const handleContinueShopping = (e) => {
+    onContinueShopping(e);
+  };
 
   const handleCheckoutShopping = () => {
     alert('Functionality to be added for future reference');
@@ -49,7 +57,7 @@ function CartItem() {
           </div>
 
           <div className="cart-summary">
-            <p>Total plants: {itemCount}</p>
+            <p>Total cart amount: {itemCount}</p>
             <p>Total cost: ${calculateTotalAmount().toFixed(2)}</p>
           </div>
         </section>
@@ -58,14 +66,45 @@ function CartItem() {
           <>
             <section className="cart-list">
               {cartItems.map((item) => (
-                <CartItemCard
-                  key={item.name}
-                  item={item}
-                  onIncrease={handleIncrement}
-                  onDecrease={handleDecrement}
-                  onDelete={handleRemove}
-                  calculateTotalCost={calculateTotalCost}
-                />
+                <article key={item.name} className="cart-card">
+                  <img className="cart-image" src={item.image} alt={item.name} />
+                  <div className="cart-card-content">
+                    <div className="cart-card-header">
+                      <div>
+                        <h3>{item.name}</h3>
+                        <p className="cart-meta">Unit price: {item.cost}</p>
+                        <p className="cart-meta">
+                          Total cost: ${calculateTotalCost(item).toFixed(2)}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        className="text-button danger-text"
+                        onClick={() => handleRemove(item.name)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+
+                    <div className="quantity-controls">
+                      <button
+                        type="button"
+                        className="quantity-button"
+                        onClick={() => handleDecrement(item)}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-value">{item.quantity}</span>
+                      <button
+                        type="button"
+                        className="quantity-button"
+                        onClick={() => handleIncrement(item)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </article>
               ))}
             </section>
 

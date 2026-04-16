@@ -421,6 +421,12 @@ button {
   margin-top: 28px;
 }
 
+.cart-total-text {
+  margin-top: 24px;
+  color: #31513d;
+  font-weight: 700;
+}
+
 .empty-cart {
   margin-top: 40px;
   padding: 40px;
