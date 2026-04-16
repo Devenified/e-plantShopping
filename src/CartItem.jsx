@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../components/Header';
-import CartItemCard from '../components/CartItemCard';
-import { removeItem, updateQuantity } from '../CartSlice';
+import Header from './components/Header';
+import CartItemCard from './components/CartItemCard';
+import { removeItem, updateQuantity } from './CartSlice';
 
-function CartPage() {
+function CartItem() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -45,7 +45,7 @@ function CartPage() {
           <div>
             <p className="eyebrow">Shopping cart</p>
             <h1>Your nursery selections</h1>
-            <p>Review your plants, adjust quantities, and move forward when everything looks right.</p>
+            <p>Review your plants, update quantities, and continue when everything looks right.</p>
           </div>
 
           <div className="cart-summary">
@@ -96,4 +96,4 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+export default CartItem;

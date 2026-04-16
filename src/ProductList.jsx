@@ -1,9 +1,9 @@
-import Header from '../components/Header';
-import PlantCard from '../components/PlantCard';
+import Header from './components/Header';
+import PlantCard from './components/PlantCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../CartSlice';
+import { addItem } from './CartSlice';
 
-function ProductsPage({ sections }) {
+function ProductList({ sections }) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -19,8 +19,8 @@ function ProductsPage({ sections }) {
           <p className="eyebrow">Plant catalog</p>
           <h1>Browse our house plants by mood and purpose.</h1>
           <p>
-            Choose fragrance-forward picks for welcoming rooms or wellness-focused greens for a
-            calmer daily ritual.
+            Explore aromatic plants for fragrance, medicinal plants for everyday wellness, and
+            air-purifying plants for fresher indoor spaces.
           </p>
         </section>
 
@@ -48,4 +48,4 @@ function ProductsPage({ sections }) {
   );
 }
 
-export default ProductsPage;
+export default ProductList;
