@@ -1,11 +1,20 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import AboutUs from './AboutUs';
 import ProductList from './ProductList';
 import CartItem from './CartItem';
 import { plantSections } from './data/plants';
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const [showProductList, setShowProductList] = useState(false);
+
+  const handleGetStarted = () => {
+    setShowProductList(true);
+    navigate('/products');
+  };
+
   return (
     <main className="landing-page">
       <section className="hero-card">
@@ -17,12 +26,13 @@ function LandingPage() {
             that bring freshness, style, and calm into your home.
           </p>
           <AboutUs />
-          <Link to="/products" className="button hero-button">
+          <Link to="/products" className="button hero-button" onClick={handleGetStarted}>
             Get Started
           </Link>
+          {showProductList ? <span className="sr-only">Product list visible</span> : null}
         </div>
 
-        <div className="hero-visual">
+        <div className="hero-visual background-image">
           <div className="hero-badge">Live plants, styled simply</div>
         </div>
       </section>

@@ -1,19 +1,19 @@
 function AboutUs() {
   return (
-    <section className="about-us">
+    <div className="about-us-container">
       <p className="eyebrow">About Paradise Nursery</p>
-      <h1>Paradise Nursery</h1>
+      <h2>Paradise Nursery</h2>
       <p className="hero-text">
-        Paradise Nursery is a modern plant shop focused on houseplants that make homes feel calmer,
-        fresher, and more alive. Our collection brings together aromatic, medicinal, and
-        air-purifying plants chosen for beauty, practical value, and simple day-to-day care.
+        Paradise Nursery is a welcoming plant company that helps customers decorate their homes
+        with healthy, beautiful indoor plants. We offer aromatic, medicinal, and air-purifying
+        plants that are easy to browse, compare, and enjoy.
       </p>
       <p className="hero-text">
-        We believe every room deserves a little more green. Whether you want a statement plant for
-        your living room or a compact herb for a bright kitchen shelf, Paradise Nursery makes it
-        easy to browse, compare, and build your indoor garden.
+        Our mission is to make indoor gardening simple and enjoyable for everyone. Through our
+        nursery services, plant guidance, and shopping experience, we help customers choose plants
+        that match their space, lifestyle, and wellness goals.
       </p>
-    </section>
+    </div>
   );
 }
 
